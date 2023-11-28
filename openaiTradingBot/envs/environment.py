@@ -39,7 +39,7 @@ class InvestmentEnv(gym.Env):
         return self.state
 
     def render(self, mode='human', close=False):
-        print(f"Current State: {self.state}")
+        print("")
 
     def close(self):
         pass

@@ -15,6 +15,14 @@ total_reward = 0
 
 # Load the evaluation data
 evaluation_data = pd.read_csv('evaluation_data.csv')
+# Create a direct mapping from action indices to names
+index_to_action = {
+    0: "Stocks",
+    1: "Real_Estates",
+    2: "Commodities",
+    3: "Cryptocurrencies",
+    4: "Forex"
+}
 
 # Evaluate the agent on each state in the evaluation data
 for index, row in evaluation_data.iterrows():
@@ -28,8 +36,8 @@ for index, row in evaluation_data.iterrows():
     # Optionally render the environment
     env.render()
     total_reward += reward
-    print(f"Evaluation on state {state + 1}: Action - {action}, Reward - {reward}")
+    action_index = np.argmax(agent.q_table[state])
+    action_name = index_to_action[action_index]
     
+    print(f"Evaluation on state {state + 1}: Action - {action_name}, Reward - {reward}")
 print(f"Total reward after evaluation: {total_reward}")
-# Note: This evaluation loop assumes that your environment can set states directly,
-# and that the 'State' column in evaluation_data.csv is 1-indexed.
